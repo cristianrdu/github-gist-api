@@ -1,6 +1,8 @@
 import './App.css';
 import React from 'react';
 import axios from "axios";
+import SearchBox from './components/search-box/search-box';
+import GistList from './components/gist-list/gist-list';
 
 const { useState } = React;
 
@@ -33,7 +35,10 @@ function App() {
 
   return (
     <div className="App">
-
+      <SearchBox placeholder='Search by user...' handleChange={setUsername} handleSubmit={fetchGistList}/>
+      {gistListData ? 
+      <GistList data= {gistListData}/>
+      : null}
     </div>
   );
 }

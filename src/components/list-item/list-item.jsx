@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import ItemModal from '../item-modal/item-modal';
+
 import './list-item.css';
  
 const ListItem = ({id, files, forks}) => {
@@ -54,17 +54,7 @@ const ListItem = ({id, files, forks}) => {
                     <p><b>File Content:</b> {fileData.content}</p>   
                 </div>
             </div>
-            <Modal show={show} onHide={handleClose} animation={false}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{fileContent}</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                    Close
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            <ItemModal handleClose={handleClose} show={show} fileContent={fileContent} fileName={fileData.filename}/>
         </>
         )
 }

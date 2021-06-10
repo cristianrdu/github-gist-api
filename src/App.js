@@ -7,29 +7,29 @@ import GistList from './components/gist-list/gist-list';
 const { useState } = React;
 
   
-const fetchUserGistData = async (user) => {
-  return axios.get(`https://api.github.com/users/${user}/gists`)
-  .then(({data}) => {
-    return data;
-  }).catch( (error) => {
-    console.log(error);
-    return error;
-  });
-}
 
 function App() {
   const [user, setUser] = useState('');
   const [gistListData, setGistListData] = useState([]);
-
+  
   const setUsername = (event) => {
     setUser(event.target.value);
   }
 
+  const fetchUserGistData = async () => {
+    return axios.get(`https://api.github.com/users/${user}/gists`)
+    .then(({data}) => {
+      return data;
+    }).catch((error) => {
+      return error;
+    });
+  }
+  
   const fetchGistList = async event => {
     event.preventDefault();
 
     if (user !== '') {
-      const data = await fetchUserGistData(user);
+      const data = await fetchUserGistData();
       setGistListData(data || '');
       console.log(data);
     }else {

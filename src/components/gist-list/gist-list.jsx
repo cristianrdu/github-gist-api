@@ -6,10 +6,10 @@ import './gist-list.css';
 const GistList = ({data}) => {
     return (
         <div className='gist-list'>
-            {data.map(dataItem => (
-                <ListItem key={dataItem.id} id={dataItem.id} files={dataItem.files} forks= {dataItem.forks}/>
-            )
-            )}
+            { data.map(dataItem => (
+                <ListItem key={dataItem.id} id={dataItem.id} files={dataItem.files} forks={dataItem.forks}/>
+            ))
+        }
         </div>
     )
 }

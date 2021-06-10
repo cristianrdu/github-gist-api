@@ -19,7 +19,7 @@ const fetchUserGistData = async (user) => {
 
 function App() {
   const [user, setUser] = useState('');
-  const [gistListData, setGistListData] = useState({});
+  const [gistListData, setGistListData] = useState([]);
 
   const setUsername = (event) => {
     setUser(event.target.value);
@@ -28,15 +28,19 @@ function App() {
   const fetchGistList = async event => {
     event.preventDefault();
 
-    const data = await fetchUserGistData(user);
-    setGistListData(data || '');
-    console.log(data);
+    if (user !== '') {
+      const data = await fetchUserGistData(user);
+      setGistListData(data || '');
+      console.log(data);
+    }else {
+      alert("You need to type in a username first");
+    }
   }
 
   return (
     <div className="App">
       <SearchBox placeholder='Search by user...' handleChange={setUsername} handleSubmit={fetchGistList}/>
-      {gistListData ? 
+      {gistListData.length ? 
       <GistList data= {gistListData}/>
       : null}
     </div>
